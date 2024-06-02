@@ -30,10 +30,22 @@ class Menu(models.Model):
 class ProductExtra(models.Model):
     image = models.ImageField(upload_to='extra')
     price = models.DecimalField(max_digits=10, decimal_places= 2)
+    name = models.CharField(max_length=30)
 
 
     def __str__(self) -> str:
-        return self.price
+        return self.name
+    
+class ProductSize(models.Model):
+    size = models.CharField(max_length=20)
+    price = models.DecimalField(max_digits=10, decimal_places= 2)
+    # product = models.ForeignKey(Product,on_delete=models.CASCADE )
+    # extra_products = models.ManyToManyField(ProductExtra,default=None)
+
+
+    def __str__(self) -> str:
+        return self.size
+
 
 
 class Product(BaseModel):
@@ -42,20 +54,13 @@ class Product(BaseModel):
     description = models.TextField()
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     status = models.BooleanField()
-    # size1 = models.ForeignKey(ProductSize, on_delete=models.CASCADE, null=True)
+    size = models.ForeignKey(ProductSize, on_delete=models.CASCADE, null=True)
 
     def __str__(self) -> str:
         return self.name
 
 
-class ProductSize(models.Model):
-    size = models.CharField(max_length=20)
-    price = models.DecimalField(max_digits=10, decimal_places= 2)
-    product = models.ForeignKey(Product,on_delete=models.CASCADE )
-    extra_products = models.ManyToManyField(ProductExtra,)
 
-    def __str__(self) -> str:
-        return self.size
 
 
 
@@ -90,7 +95,7 @@ class UsertLocation(models.Model):
     adress_name = models.CharField(max_length=200)
 
     def __str__(self) -> str:
-        return self.region
+        return self.adress
 
 
 class Contact(models.Model):
@@ -121,6 +126,9 @@ class Basket(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places= 2)
     number = models.IntegerField()
     total_amount = models.DecimalField(max_digits=10, decimal_places= 2)
+
+    def __str__(self) -> str:
+        return self.name
 
 
 
