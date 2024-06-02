@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from .serializers import *
 import random
 from datetime import timedelta,datetime
+from rest_framework import generics
+from . models import Product
 
 
 
@@ -54,3 +56,11 @@ class AuthenticationRegister(ListAPIView):
 #             status = 201 
 #         )
     
+class ProductDetailAPIView(generics.RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductDetailSerializer
+
+
+class ExtraProductAPIView(generics.RetrieveAPIView):
+    queryset = ProductExtra.objects.all()
+    serializer_class = ExtraProductSerializer
