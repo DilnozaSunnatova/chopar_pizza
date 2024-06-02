@@ -68,7 +68,7 @@ class AcsiyaListAPIView(ListAPIView):
     queryset = AcsiyaModel.objects.all()
 
 
-class LocationListAPIView(ListAPIView):
+class ContactListAPIView(ListAPIView):
     serializer_class = ContactSerializers
     queryset = ContactModel.objects.all()
     
