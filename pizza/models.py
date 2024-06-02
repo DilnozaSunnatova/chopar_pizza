@@ -16,14 +16,24 @@ class Authentication(BaseModel):
         max_length=20,
         choices=GenderStatus.choices
     )
-
+    def __str__(self) -> str:
+        return self.first_name
 
 class Menu(models.Model):
     name = models.CharField(max_length=30)
 
+
+
+    def __str__(self) -> str:
+        return self.name
+    
 class ProductExtra(models.Model):
     image = models.ImageField(upload_to='extra')
     price = models.DecimalField(max_digits=10, decimal_places= 2)
+
+
+    def __str__(self) -> str:
+        return self.price
 
 
 class Product(BaseModel):
@@ -34,12 +44,18 @@ class Product(BaseModel):
     status = models.BooleanField()
     # size1 = models.ForeignKey(ProductSize, on_delete=models.CASCADE, null=True)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class ProductSize(models.Model):
     size = models.CharField(max_length=20)
     price = models.DecimalField(max_digits=10, decimal_places= 2)
     product = models.ForeignKey(Product,on_delete=models.CASCADE )
     extra_products = models.ManyToManyField(ProductExtra,)
+
+    def __str__(self) -> str:
+        return self.size
 
 
 
@@ -51,9 +67,16 @@ class About(models.Model):
     description = models.TextField()
 
 
+    def __str__(self) -> str:
+        return self.name
+
+
 
 class Region(models.Model):
     name = models.CharField(max_length=30)
+
+    def __str__(self) -> str:
+        return self.name
 
 
 
@@ -66,6 +89,9 @@ class UsertLocation(models.Model):
     code = models.IntegerField()
     adress_name = models.CharField(max_length=200)
 
+    def __str__(self) -> str:
+        return self.region
+
 
 class Contact(models.Model):
     name = models.CharField(max_length=100)
@@ -77,24 +103,16 @@ class Contact(models.Model):
     review = models.TextField()
 
 
-
-
-
-    
-
-
-
-
-
-    
-
-    
-
+    def __str__(self) -> str:
+        return self.name
 
 class Discount(BaseModel):
     title = models.CharField(max_length=20)
     img = models.ImageField(upload_to='discount')
     description = models.TextField()
+
+    def __str__(self) -> str:
+        return self.title
 
 
 class Basket(models.Model):
