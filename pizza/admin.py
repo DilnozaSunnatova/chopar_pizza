@@ -1,5 +1,14 @@
 from django.contrib import admin
-from pizza.models import BaseModel,Authentication,Menu,Product,ProductExtra,ProductSize,About,Region,UsertLocation,Discount,Basket
+
+# Register your models here.
+
+
+from .models import BaseModel,Authentication,Menu,Product,ProductExtra,ProductSize,About,Region,UsertLocation,Discount,Basket, LocationModel, AcsiyaModel, ContactModel
+
+
+admin.site.register(LocationModel)
+admin.site.register(AcsiyaModel)
+admin.site.register(ContactModel)
 
 admin.site.register(BaseModel)
 admin.site.register(Authentication)

@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'pizza',
     'rest_framework',
     'drf_yasg',
-
+    'django_filters',
 ]
 
 MIDDLEWARE = [
