@@ -1,23 +1,98 @@
 from django.db import models
 
+from django.db import models
+from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+import re
+
+from django.core import validators
+from django.utils.deconstruct import deconstructible
+
+from django.contrib import auth
+from django.contrib.auth.hashers import make_password
+from django.apps import apps
+
+from django.contrib.auth.models import AbstractBaseUser,AbstractUser
+
 class BaseModel(models.Model):
     created_up = models.DateTimeField()
     updated_up = models.DateTimeField()
 
-class Authentication(BaseModel):
-    class GenderStatus(models.TextChoices):
-        MALE = 'male', 'Male'
-        FEMALE = 'female', 'Female'
+# class Authentication(BaseModel):
+#     class GenderStatus(models.TextChoices):
+#         MALE = 'male', 'Male'
+#         FEMALE = 'female', 'Female'
 
-    first_name = models.CharField(max_length=30)
-    phone_number = models.CharField(max_length=13)
-    birt_date = models.DateField()
-    gender = models.CharField(
-        max_length=20,
-        choices=GenderStatus.choices
-    )
-    def __str__(self) -> str:
-        return self.first_name
+#     first_name = models.CharField(max_length=30)
+#     phone_number = models.CharField(max_length=13)
+#     birt_date = models.DateField()
+#     gender = models.CharField(
+#         max_length=20,
+#         choices=GenderStatus.choices
+#     )
+#     def __str__(self) -> str:
+#         return self.first_name
+
+
+
+
+# @deconstructible
+# class UnicodePhoneValidator(validators.RegexValidator):
+#     regex = r"^998[0-9]{9}"
+#     message = "Noto'g'ri raqam"
+
+# class Authentication(AbstractUser):
+
+#     class AuthStatus(models.TextChoices):
+#         NEW = 'new','Yangi'
+#         APPROVED = 'approved','Tasdiqlangan'
+
+#     phone_validator = UnicodePhoneValidator()
+#     username = None
+    
+#     phone = models.CharField(
+#         max_length=13,
+#         unique= True,
+#         validators= [phone_validator]
+#         )
+
+#     USERNAME_FIELD = "phone"
+#     REQUIRED_FIELDS = []
+
+#     objects = CustomUserManager()
+
+#     status = models.CharField(
+#         max_length=100,
+#         choices=UserAuthStatus.choices, 
+#         default=UserAuthStatus.NEW
+#     )
+#     code = models.CharField(max_length=4,null=True)
+#     expire_date = models.DateTimeField(null=True)
+
+#     def __str__(self) -> str:
+#         return f"{self.id}-{self.phone}"
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class Menu(models.Model):
     name = models.CharField(max_length=30)
