@@ -2,13 +2,26 @@ from django.shortcuts import render
 
 from rest_framework.generics import ListAPIView, ListCreateAPIView
 
+from rest_framework import generics
+from .models import Product, CartItem
+from .serializers import ProductSerializer, CartItemSerializer
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
 # Create your views here.
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import *
 import random
 from datetime import timedelta,datetime
+from . models import Product
 
+
+from .serializers import AcsiyaSerializers, ContactSerializers, LocationSerializers
+
+from .models import AcsiyaModel, ContactModel, LocationModel
+
+from django.shortcuts import render, redirect
 
 
 
@@ -57,12 +70,16 @@ class AuthenticationRegister(ListAPIView):
 #             status = 201 
 #         )
     
+class ProductDetailAPIView(generics.RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductDetailSerializer
 
-from .serializers import AcsiyaSerializers, ContactSerializers, LocationSerializers
 
-from .models import AcsiyaModel, ContactModel, LocationModel
+class ExtraProductAPIView(generics.RetrieveAPIView):
+    queryset = ProductExtra.objects.all()
+    serializer_class = ExtraProductSerializer
+    
 
-from django.shortcuts import render, redirect
 class AcsiyaListAPIView(ListAPIView):
     serializer_class = AcsiyaSerializers
     queryset = AcsiyaModel.objects.all()
@@ -91,11 +108,7 @@ class LocationListAPIView(ListAPIView):
     
 
 
-from rest_framework import generics
-from .models import Product, CartItem
-from .serializers import ProductSerializer, CartItemSerializer
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
+
 
 class ProductListCreateView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
