@@ -22,7 +22,7 @@ class ContactModel(models.Model):
     description = models.CharField(max_length=500)
 
     def __str__(self):
-        return f"{self.id}-{self.name}"
+        return f"{self.name}"
 
 
 class AcsiyaModel(models.Model):
@@ -162,5 +162,25 @@ class Basket(models.Model):
 
 
 
+#  Buni Abdulloh aka qilgan ekan men qo'shish uchun qilgandim o'chirsalariz bo'ladi
+class Product(models.Model):
+    id = models.AutoField(primary_key=True, default=1)
+    name = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+
+    def __str__(self):
+        return self.name
+
+# Card Item bu hamma mahsulotlarni yig'ib beradi o'chirmanglar
+class CartItem(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.quantity} x {self.product.name}"
+
+    @property
+    def total_price(self):
+        return self.product.price * self.quantity
 
 

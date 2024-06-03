@@ -8,7 +8,10 @@ from .models import BaseModel,Authentication,Menu,Product,ProductExtra,ProductSi
 
 admin.site.register(LocationModel)
 admin.site.register(AcsiyaModel)
-admin.site.register(ContactModel)
+@admin.register(ContactModel)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'description')
+
 
 admin.site.register(BaseModel)
 admin.site.register(Authentication)

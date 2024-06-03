@@ -1,7 +1,7 @@
 from rest_framework import serializers
 import django_filters
 
-from .models import AcsiyaModel, ContactModel, LocationModel
+from .models import AcsiyaModel, ContactModel, LocationModel, Product, CartItem
 
 class AcsiyaSerializers(serializers.ModelSerializer):
     
@@ -37,4 +37,17 @@ class AuthenticationSerializer(Serializer):
         fields =  '__all__'
 
 
+#  Buni Abdulloh aka qilgan ekan men qo'shish uchun qilgandim o'chirsalariz bo'ladi
 
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+# Card Item bu hamma mahsulotlarni yig'ib beradi o'chirmanglar
+class CartItemSerializer(serializers.ModelSerializer):
+    total_price = serializers.ReadOnlyField()
+
+    class Meta:
+        model = CartItem
+        fields = '__all__'

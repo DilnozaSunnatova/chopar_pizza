@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, ListCreateAPIView
 
 # Create your views here.
 from rest_framework.views import APIView
@@ -62,13 +62,23 @@ from .serializers import AcsiyaSerializers, ContactSerializers, LocationSerializ
 
 from .models import AcsiyaModel, ContactModel, LocationModel
 
-
+from django.shortcuts import render, redirect
 class AcsiyaListAPIView(ListAPIView):
     serializer_class = AcsiyaSerializers
     queryset = AcsiyaModel.objects.all()
 
 
-class ContactListAPIView(ListAPIView):
+class ContactListAPIView(ListCreateAPIView):
+    def create_contact(request):
+        if request.method == 'POST':
+            form = ContactModel(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('success')
+        else:
+            form = ContactModel()
+        return render(request, 'create_contact.html', {'form': form})
+    
     serializer_class = ContactSerializers
     queryset = ContactModel.objects.all()
     
@@ -77,3 +87,39 @@ class ContactListAPIView(ListAPIView):
 class LocationListAPIView(ListAPIView):
     serializer_class = LocationSerializers
     queryset = LocationModel.objects.all()
+    
+    
+
+
+from rest_framework import generics
+from .models import Product, CartItem
+from .serializers import ProductSerializer, CartItemSerializer
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
+class ProductListCreateView(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+class CartItemListCreateView(generics.ListCreateAPIView):
+    queryset = CartItem.objects.all()
+    serializer_class = CartItemSerializer
+
+class CartItemDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = CartItem.objects.all()
+    serializer_class = CartItemSerializer
+
+@api_view(['POST'])
+def add_quantity(request, pk):
+    try:
+        cart_item.quantity += 1
+        cart_item = CartItem.objects.get(pk=pk)
+        cart_item.save()
+        return Response(CartItemSerializer(cart_item).data)
+    except CartItem.DoesNotExist:
+        return Response(status=404)
+
