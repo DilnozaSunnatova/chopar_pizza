@@ -3,7 +3,7 @@ from rest_framework.serializers import Serializer, ModelSerializer
 from rest_framework import serializers
 import django_filters
 
-from .models import AcsiyaModel, ContactModel, LocationModel, Product, CartItem
+from .models import AcsiyaModel, ContactModel, LocationModel, Product, CartItem, AdressCostumer
 
 class AcsiyaSerializers(serializers.ModelSerializer):
     
@@ -62,4 +62,9 @@ class CartItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CartItem
+        fields = '__all__'
+
+class AdressCostumerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AdressCostumer
         fields = '__all__'

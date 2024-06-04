@@ -184,3 +184,13 @@ class CartItem(models.Model):
         return self.product.price * self.quantity
 
 
+class AdressCostumer(models.Model):
+    latitude = models.FloatField(null=True) 
+    longitude = models.FloatField(null=True)
+    name = models.CharField(max_length=100)
+    adress = models.CharField(max_length=200)
+    kvartira = models.CharField(max_length=150)
+    podez = models.CharField(max_length=150)
+    enter_code = models.IntegerField()
+    dom = models.PositiveIntegerField(default=1)
+    

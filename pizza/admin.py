@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 
 
-from .models import BaseModel,Authentication,Menu,Product,ProductExtra,ProductSize,About,Region,UsertLocation,Discount,Basket, LocationModel, AcsiyaModel, ContactModel
+from .models import BaseModel,Authentication,Menu,Product,ProductExtra,ProductSize,About,Region,UsertLocation,Discount,Basket, LocationModel, AcsiyaModel, ContactModel, AdressCostumer
 
 
 admin.site.register(LocationModel)
@@ -13,6 +13,7 @@ class ContactAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'description')
 
 
+admin.site.register(AdressCostumer)
 admin.site.register(BaseModel)
 admin.site.register(Authentication)
 admin.site.register(Menu)

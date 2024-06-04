@@ -17,9 +17,9 @@ from datetime import timedelta,datetime
 from . models import Product
 
 
-from .serializers import AcsiyaSerializers, ContactSerializers, LocationSerializers
+from .serializers import AcsiyaSerializers, ContactSerializers, LocationSerializers, AdressCostumerSerializer
 
-from .models import AcsiyaModel, ContactModel, LocationModel
+from .models import AcsiyaModel, ContactModel, LocationModel, AdressCostumer
 
 from django.shortcuts import render, redirect
 
@@ -136,3 +136,9 @@ def add_quantity(request, pk):
     except CartItem.DoesNotExist:
         return Response(status=404)
 
+
+
+class AdressCostumerListCreateView(generics.ListCreateAPIView):
+    queryset = AdressCostumer.objects.all()
+    serializer_class = AdressCostumerSerializer
+    
