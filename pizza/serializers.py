@@ -47,3 +47,6 @@ class ProductListSerializer(serializers.ModelSerializer):
         exclude = ('created_up','updated_up',)
 
 
+
+
+

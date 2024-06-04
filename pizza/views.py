@@ -36,13 +36,12 @@ class ProductSizeListAPIView(ListAPIView):
     queryset = ProductSize.objects.all()
     serializer_class = ProductSizeSerializer
 
-
-class ProductListSerializer(ListAPIView):
+class ProductListAPIView(ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductListSerializer
     filter_backends =[DjangoFilterBackend,]
-    filterset_fields = ('menu',)
-    search_fields = ('name',)
+    filterset_fields = ("name",)
+    search_fields = ('menu',)
 
 
 class ExtraProductListListAPIView(ListAPIView):
