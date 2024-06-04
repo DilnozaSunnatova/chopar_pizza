@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'pizza',
     'rest_framework',
     'drf_yasg',
+    'geopy',
+    'django_filters'
 
 ]
 

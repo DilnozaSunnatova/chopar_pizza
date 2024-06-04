@@ -1,4 +1,5 @@
 from django.db import models
+from geopy import GoogleV3
 
 class BaseModel(models.Model):
     created_up = models.DateTimeField()
@@ -35,18 +36,7 @@ class ProductExtra(models.Model):
 
     def __str__(self) -> str:
         return self.name
-    
-class ProductSize(models.Model):
-    size = models.CharField(max_length=20)
-    price = models.DecimalField(max_digits=10, decimal_places= 2)
-    # product = models.ForeignKey(Product,on_delete=models.CASCADE )
-    # extra_products = models.ManyToManyField(ProductExtra,default=None)
-
-
-    def __str__(self) -> str:
-        return self.size
-
-
+ 
 
 class Product(BaseModel):
     name = models.CharField(max_length= 30)
@@ -54,10 +44,22 @@ class Product(BaseModel):
     description = models.TextField()
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     status = models.BooleanField()
-    size = models.ForeignKey(ProductSize, on_delete=models.CASCADE, null=True)
+    
 
     def __str__(self) -> str:
         return self.name
+
+   
+class ProductSize(models.Model):
+    size = models.CharField(max_length=20)
+    price = models.DecimalField(max_digits=10, decimal_places= 2)
+    product_size = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, related_name='size')
+    # product = models.ForeignKey(Product,on_delete=models.CASCADE )
+    # extra_products = models.ManyToManyField(ProductExtra,default=None)
+
+
+    def __str__(self) -> str:
+        return self.size
 
 
 
@@ -130,6 +132,17 @@ class Basket(models.Model):
     def __str__(self) -> str:
         return self.name
 
+
+class Branche(models.Model):
+    location_name = models.CharField(max_length=50)
+    region = models.ForeignKey(Region, on_delete=models.CASCADE,  null=True)
+    description = models.TextField(max_length=150)
+    latitude = models.FloatField(null=True) 
+    longitude = models.FloatField(null=True)
+
+    def __str__(self) -> str:
+        return self.location_name
+    
 
 
 
