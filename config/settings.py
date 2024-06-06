@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pizza',
     'rest_framework',
+    'drf_yasg',
     'django_filters',
 ]
 
