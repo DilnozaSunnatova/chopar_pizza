@@ -53,4 +53,11 @@ class BranchsListApiview(ListAPIView):
     queryset = Branche.objects.all()
     serializer_class = BranchSerializer
 
+
+class MenuListAPIView(ListAPIView):
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer
+    filter_backends =[DjangoFilterBackend,]
+    filterset_fields = ("name",)
+    
     

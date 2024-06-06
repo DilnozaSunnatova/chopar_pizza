@@ -47,6 +47,9 @@ class ProductListSerializer(serializers.ModelSerializer):
         exclude = ('created_up','updated_up',)
 
 
-
+class MenuSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Menu
+        fields = "__all__"
 
 

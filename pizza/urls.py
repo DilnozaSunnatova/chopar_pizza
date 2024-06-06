@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import (AuthenticationRegister, ProductDetailAPIView, ExtraProductAPIView, BrancheViewSet,
-                    ProductListAPIView, ProductSizeListAPIView, ExtraProductListListAPIView, BranchsListApiview)
+                    ProductListAPIView, ProductSizeListAPIView, ExtraProductListListAPIView, BranchsListApiview,
+                    MenuListAPIView)
 from rest_framework.routers import DefaultRouter
 
 
@@ -15,7 +16,8 @@ urlpatterns=[
     path('productlist/', ProductListAPIView.as_view()),
     path('productsize/', ProductSizeListAPIView.as_view()),
     path('extraprodlist/', ExtraProductListListAPIView.as_view()),
-    path('branchlist/', BranchsListApiview.as_view())
+    path('branchlist/', BranchsListApiview.as_view()),
+    path('menulist/', MenuListAPIView.as_view())
     
     
 ]
