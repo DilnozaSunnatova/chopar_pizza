@@ -13,22 +13,26 @@ class AuthenticationSerializer(Serializer):
 class ProductSizeSerializer(serializers.ModelSerializer):
     class Meta:
         model=ProductSize
-        exclude = ('product_size',)
+        fields = '__all__'
+
+
+
+class ExtraProductSerializer(serializers.ModelSerializer):
+    extra_products = serializers.StringRelatedField(source='extra_products.name') 
+    class Meta:
+        model = ProductExtra
+        fields = "__all__"
+
 
 
 class ProductDetailSerializer(serializers.ModelSerializer):
     product_sezee = serializers.ListSerializer(child=ProductSizeSerializer(), source='size')
     size = serializers.StringRelatedField(source='size.size')  
     menu = serializers.StringRelatedField(source='menu.name')
+    
     class Meta:
         model = Product
         exclude = ('created_up','updated_up',)
-
-
-class ExtraProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProductExtra
-        fields = "__all__"
 
 
 class BranchSerializer(serializers.ModelSerializer):
@@ -42,6 +46,7 @@ class ProductListSerializer(serializers.ModelSerializer):
     product_sizee = serializers.ListSerializer(child=ProductSizeSerializer(), source='size')
     size = serializers.StringRelatedField(source='size.size')  
     menu = serializers.StringRelatedField(source='menu.name')
+    name = serializers.StringRelatedField(source='name.name') 
     class Meta:
         model = Product
         exclude = ('created_up','updated_up',)

@@ -38,28 +38,29 @@ class ProductExtra(models.Model):
         return self.name
  
 
+   
+class ProductSize(models.Model):
+    size = models.CharField(max_length=20)
+    price = models.DecimalField(max_digits=10, decimal_places= 2)
+    extra_products = models.ManyToManyField(ProductExtra,default=None, null=True)
+
+
+    def __str__(self) -> str:
+        return self.size
+
+
 class Product(BaseModel):
     name = models.CharField(max_length= 30)
     photo = models.ImageField(upload_to='product1')
     description = models.TextField()
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     status = models.BooleanField()
+    size = models.ManyToManyField(ProductSize, null=True)
     
 
     def __str__(self) -> str:
         return self.name
 
-   
-class ProductSize(models.Model):
-    size = models.CharField(max_length=20)
-    price = models.DecimalField(max_digits=10, decimal_places= 2)
-    product_size = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, related_name='size')
-    # product = models.ForeignKey(Product,on_delete=models.CASCADE )
-    # extra_products = models.ManyToManyField(ProductExtra,default=None)
-
-
-    def __str__(self) -> str:
-        return self.size
 
 
 
