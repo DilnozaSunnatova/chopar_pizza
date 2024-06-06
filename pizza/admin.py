@@ -1,4 +1,19 @@
 from django.contrib import admin
+
+# Register your models here.
+
+
+from .models import BaseModel,Authentication,Menu,Product,ProductExtra,ProductSize,About,Region,UsertLocation,Discount,Basket, LocationModel, AcsiyaModel, ContactModel, AdressCostumer
+
+
+admin.site.register(LocationModel)
+admin.site.register(AcsiyaModel)
+@admin.register(ContactModel)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'description')
+
+
+admin.site.register(AdressCostumer)
 from pizza.models import (BaseModel,User,Menu,Product,
                           ProductExtra,ProductSize,About,Region,UsertLocation,
                           Discount,Basket,  Branche)

@@ -11,6 +11,33 @@ from django.contrib.auth.hashers import make_password
 from django.contrib import auth
 
 
+    
+# from django.contrib.gis.db import models
+# from django.contrib.gis.geos import Point
+
+class LocationModel(models.Model):
+    name = models.CharField(max_length=100)
+    # coordinates = models.PointField()
+    address = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
+
+class ContactModel(models.Model):
+    name = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=20)
+    email = models.EmailField()
+    customer_number = models.CharField(max_length=20)
+    description = models.CharField(max_length=500)
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+class AcsiyaModel(models.Model):
+    name = models.CharField(max_length=100)
 class BaseModel(models.Model):
     created_up = models.DateTimeField()
     updated_up = models.DateTimeField()
@@ -274,5 +301,35 @@ class Branche(models.Model):
 
 
 
+#  Buni Abdulloh aka qilgan ekan men qo'shish uchun qilgandim o'chirsalariz bo'ladi
+class Product(models.Model):
+    id = models.AutoField(primary_key=True, default=1)
+    name = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+
+    def __str__(self):
+        return self.name
+
+# Card Item bu hamma mahsulotlarni yig'ib beradi o'chirmanglar
+class CartItem(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.quantity} x {self.product.name}"
+
+    @property
+    def total_price(self):
+        return self.product.price * self.quantity
 
 
+class AdressCostumer(models.Model):
+    latitude = models.FloatField(null=True) 
+    longitude = models.FloatField(null=True)
+    name = models.CharField(max_length=100)
+    adress = models.CharField(max_length=200)
+    kvartira = models.CharField(max_length=150)
+    podez = models.CharField(max_length=150)
+    enter_code = models.IntegerField()
+    dom = models.PositiveIntegerField(default=1)
+    

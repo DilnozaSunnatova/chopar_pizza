@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'pizza',
     
     'drf_yasg',
+    'django_filters',
     
     'django_filters',
     
