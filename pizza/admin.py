@@ -1,8 +1,8 @@
 from django.contrib import admin
-from pizza.models import BaseModel,Authentication,Menu,Product,ProductExtra,ProductSize,About,Region,UsertLocation,Discount,Basket
+from .models import BaseModel,User,Menu,Product,ProductExtra,ProductSize,About,Region,UsertLocation,Discount,Basket
 
 admin.site.register(BaseModel)
-admin.site.register(Authentication)
+admin.site.register(User)
 admin.site.register(Menu)
 admin.site.register(Product)
 admin.site.register(ProductExtra)

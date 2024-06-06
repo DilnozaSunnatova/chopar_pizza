@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-u$g=5mtrc1$-u)km&x!4$(8-cq2)e97opf()6@qsw!rm-i30l4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,8 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pizza',
-    'rest_framework',
+    
     'drf_yasg',
+    
+    'rest_framework',
+    'rest_framework.authtoken',
+
 
 ]
 
@@ -109,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 
@@ -124,4 +128,20 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # Add this line
+    ],
+}
+
+
+
+
+AUTH_USER_MODEL = "pizza.User"
+
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+#     "/var/www/static/",
+#     # "/home/mrnecro/dj_social/bffbook/static_project" 
+# ]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
