@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import BaseModel,User,Menu,Product,ProductExtra,ProductSize,About,Region,UsertLocation,Discount,Basket
+from pizza.models import (BaseModel,User,Menu,Product,
+                          ProductExtra,ProductSize,About,Region,UsertLocation,
+                          Discount,Basket,  Branche)
 
 admin.site.register(BaseModel)
 admin.site.register(User)
@@ -12,3 +14,6 @@ admin.site.register(Region)
 admin.site.register(UsertLocation)
 admin.site.register(Discount)
 admin.site.register(Basket)
+
+admin.site.register(Branche)
+

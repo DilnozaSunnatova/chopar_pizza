@@ -11,7 +11,9 @@ from django.contrib.auth.hashers import make_password
 from django.contrib import auth
 
 
-
+class BaseModel(models.Model):
+    created_up = models.DateTimeField()
+    updated_up = models.DateTimeField()
 
 class PhoneManager(BaseUserManager):
     use_in_migrations = True
@@ -105,17 +107,17 @@ class ProductExtra(models.Model):
 
     def __str__(self) -> str:
         return self.name
-    
+ 
+
+   
 class ProductSize(models.Model):
     size = models.CharField(max_length=20)
     price = models.DecimalField(max_digits=10, decimal_places= 2)
-    # product = models.ForeignKey(Product,on_delete=models.CASCADE )
-    # extra_products = models.ManyToManyField(ProductExtra,default=None)
+    extra_products = models.ManyToManyField(ProductExtra,default=None, null=True)
 
 
     def __str__(self) -> str:
         return self.size
-
 
 
 class Product(BaseModel):
@@ -124,10 +126,18 @@ class Product(BaseModel):
     description = models.TextField()
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     status = models.BooleanField()
-    size = models.ForeignKey(ProductSize, on_delete=models.CASCADE, null=True)
+    size = models.ManyToManyField(ProductSize, null=True)
+    
 
     def __str__(self) -> str:
         return self.name
+
+
+
+
+
+
+
 
 
 class About(models.Model):
@@ -193,6 +203,18 @@ class Basket(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+
+class Branche(models.Model):
+    location_name = models.CharField(max_length=50)
+    region = models.ForeignKey(Region, on_delete=models.CASCADE,  null=True)
+    description = models.TextField(max_length=150)
+    latitude = models.FloatField(null=True) 
+    longitude = models.FloatField(null=True)
+
+    def __str__(self) -> str:
+        return self.location_name
+    
     
 
 

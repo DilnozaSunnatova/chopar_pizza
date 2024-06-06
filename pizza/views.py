@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from . serializers import DiscountSerializer,AboutSeriliazer,UserSerializer,InformationSerializer,LoginSerializer
+from . serializers import *
 from .models import Discount,About,User
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -10,6 +10,11 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from datetime import datetime, timedelta
 import random
+from datetime import timedelta,datetime
+from rest_framework import generics
+from . models import Product
+from django_filters.rest_framework import DjangoFilterBackend
+
 from rest_framework.serializers import ValidationError
 
 class DiscountAPIView(ListAPIView):
@@ -114,6 +119,53 @@ class UserLoginAPIView(APIView):
                 'user': user.id
             }
         )
+
+
+class ProductDetailAPIView(generics.RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductDetailSerializer
+
+
+class ExtraProductAPIView(generics.RetrieveAPIView):
+    queryset = ProductExtra.objects.all()
+    serializer_class = ExtraProductSerializer
+
+
+class BrancheViewSet(generics.RetrieveAPIView):
+    queryset = Branche.objects.all()
+    serializer_class = BranchSerializer
+
+
+class ProductSizeListAPIView(ListAPIView):
+    queryset = ProductSize.objects.all()
+    serializer_class = ProductSizeSerializer
+
+class ProductListAPIView(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductListSerializer
+    filter_backends =[DjangoFilterBackend,]
+    filterset_fields = ("name",)
+    search_fields = ('menu',)
+
+
+class ExtraProductListListAPIView(ListAPIView):
+    queryset = ProductExtra.objects.all()
+    serializer_class = ExtraProductSerializer
+
+
+class BranchsListApiview(ListAPIView):
+    queryset = Branche.objects.all()
+    serializer_class = BranchSerializer
+
+
+class MenuListAPIView(ListAPIView):
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer
+    filter_backends =[DjangoFilterBackend,]
+    filterset_fields = ("name",)
+    
+    
+
 
 
 
@@ -338,44 +390,48 @@ class UserLoginAPIView(APIView):
 #     serializer_class = AuthenticationSerializer
 #     queryset = Authentication.objects.all()
 
+    
+class ProductDetailAPIView(generics.RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductDetailSerializer
 
 
-# class AuthenticationRegister(APIView):
-#     def post(self,request,*args,**kwargs):
-#         serializer = AuthenticationSerializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         phone = serializer.data.get('phone')
-#         password = serializer.data.get('password')
-
-#         if Authentication.objects.filter(phone=phone,status='approved').exists():
-#             raise serializers.ValidationError(
-#                 detail={"error": "Bunday foydalanuvchi ro'yhatdan o'tgan"},
-#                 code= 400
-#             )
-        
-        
-
-#         user = Authentication.objects.filter(phone=phone)
-#         if user.exists():
-#             user = user.first()
-#         else:
-#             user = Authentication.objects.create(phone=phone)
+class ExtraProductAPIView(generics.RetrieveAPIView):
+    queryset = ProductExtra.objects.all()
+    serializer_class = ExtraProductSerializer
 
 
-#         user.set_password(password)
+class BrancheViewSet(generics.RetrieveAPIView):
+    queryset = Branche.objects.all()
+    serializer_class = BranchSerializer
 
-         
+
+class ProductSizeListAPIView(ListAPIView):
+    queryset = ProductSize.objects.all()
+    serializer_class = ProductSizeSerializer
+
+class ProductListAPIView(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductListSerializer
+    filter_backends =[DjangoFilterBackend,]
+    filterset_fields = ("name",)
+    search_fields = ('menu',)
 
 
-#         code = random.randrange(1000, 9999)
-#         user.code = code
-#         user.expire_data = datetime.now() + timedelta(seconds=50)
-#         user.save()
-#         print(code)
-#         return Response(
-#             data = {
-#                 "user": user.id
-#             },
-#             status = 201 
-#         )
+class ExtraProductListListAPIView(ListAPIView):
+    queryset = ProductExtra.objects.all()
+    serializer_class = ExtraProductSerializer
+
+
+class BranchsListApiview(ListAPIView):
+    queryset = Branche.objects.all()
+    serializer_class = BranchSerializer
+
+
+class MenuListAPIView(ListAPIView):
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer
+    filter_backends =[DjangoFilterBackend,]
+    filterset_fields = ("name",)
+    
     
