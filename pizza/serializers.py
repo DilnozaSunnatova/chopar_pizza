@@ -35,6 +35,8 @@ class ProductDetailSerializer(serializers.ModelSerializer):
         exclude = ('created_up','updated_up',)
 
 
+
+
 class BranchSerializer(serializers.ModelSerializer):
     region = serializers.StringRelatedField(source='region.name')
     class Meta:
@@ -53,6 +55,7 @@ class ProductListSerializer(serializers.ModelSerializer):
 
 
 class MenuSerializer(serializers.ModelSerializer):
+    products = ProductDetailSerializer(many=True, read_only=True)
     class Meta:
         model = Menu
         fields = "__all__"
