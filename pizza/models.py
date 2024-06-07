@@ -61,7 +61,7 @@ class Product(BaseModel):
     description = models.TextField()
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     status = models.BooleanField()
-    size = models.ManyToManyField(ProductSize, null=True, default=None)
+    size = models.ManyToManyField(ProductSize, default=None, null=True)
     
     def __str__(self) -> str:
         return self.name
